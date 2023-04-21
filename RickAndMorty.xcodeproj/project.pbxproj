@@ -101,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				8DCBB78F29F0AB0E00831684 /* RickAndMorty */,
-				8D7319B529F21F77000963F2 /* Helper */,
 				8DCBB78E29F0AB0E00831684 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,6 +122,7 @@
 				8DCBB7A829F0ADA500831684 /* View */,
 				8DCBB7A929F0ADB800831684 /* ViewModel */,
 				8DCBB7A429F0ACED00831684 /* Controllers */,
+				8D7319B529F21F77000963F2 /* Helper */,
 				8DCBB7A729F0AD8E00831684 /* Services */,
 				8DCBB7AA29F0ADE400831684 /* Manager */,
 			);

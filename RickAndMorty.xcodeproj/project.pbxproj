@@ -35,6 +35,8 @@
 		8DCBB7D629F0D18B00831684 /* CharacterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DCBB7D429F0D18B00831684 /* CharacterTableViewCell.xib */; };
 		8DCBB7D929F0D1A600831684 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBB7D729F0D1A600831684 /* LocationCollectionViewCell.swift */; };
 		8DCBB7DA29F0D1A600831684 /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DCBB7D829F0D1A600831684 /* LocationCollectionViewCell.xib */; };
+		8DCEBD2E29F38CD600D0FF65 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8DCEBD2D29F38CD600D0FF65 /* SDWebImage */; };
+		8DF9DA7629F3A98B00E4FE4F /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9DA7529F3A98B00E4FE4F /* UIColor+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,7 @@
 		8DCBB7D429F0D18B00831684 /* CharacterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterTableViewCell.xib; sourceTree = "<group>"; };
 		8DCBB7D729F0D1A600831684 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DCBB7D829F0D1A600831684 /* LocationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationCollectionViewCell.xib; sourceTree = "<group>"; };
+		8DF9DA7529F3A98B00E4FE4F /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DCEBD2E29F38CD600D0FF65 /* SDWebImage in Frameworks */,
 				8DBD22B229F0D81B00520D46 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				8D7319B729F21FAA000963F2 /* UIViewController+Ext.swift */,
+				8DF9DA7529F3A98B00E4FE4F /* UIColor+Ext.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 			name = RickAndMorty;
 			packageProductDependencies = (
 				8DBD22B129F0D81B00520D46 /* Alamofire */,
+				8DCEBD2D29F38CD600D0FF65 /* SDWebImage */,
 			);
 			productName = RickAndMorty;
 			productReference = 8DCBB78D29F0AB0E00831684 /* RickAndMorty.app */;
@@ -293,6 +299,7 @@
 			mainGroup = 8DCBB78429F0AB0E00831684;
 			packageReferences = (
 				8DBD22B029F0D81B00520D46 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8DCEBD2C29F38CD600D0FF65 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 8DCBB78E29F0AB0E00831684 /* Products */;
 			projectDirPath = "";
@@ -325,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DF9DA7629F3A98B00E4FE4F /* UIColor+Ext.swift in Sources */,
 				8DCBB7BC29F0C4AC00831684 /* API.swift in Sources */,
 				8DCBB7C729F0CA2100831684 /* MainViewController.swift in Sources */,
 				8D7319B829F21FAA000963F2 /* UIViewController+Ext.swift in Sources */,
@@ -574,6 +582,14 @@
 				kind = branch;
 			};
 		};
+		8DCEBD2C29F38CD600D0FF65 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -581,6 +597,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8DBD22B029F0D81B00520D46 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		8DCEBD2D29F38CD600D0FF65 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DCEBD2C29F38CD600D0FF65 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

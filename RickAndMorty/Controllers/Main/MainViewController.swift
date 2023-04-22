@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+//        view.backgroundColor = .blue
         viewModelConfiguration()
         setupTableView()
         setupCollectionView()
@@ -57,7 +57,11 @@ class MainViewController: UIViewController {
     
     private func CharactersFromViewModel(){
         print("array",residentsArr)
-        viewModel.getMultipleCharacters(CharacterIdsArray: residentsArr)
+        if residentsArr.count == 1 {
+            viewModel.getSingleCharacter(CharacterIdsArray: residentsArr)
+        }else {
+            viewModel.getMultipleCharacters(CharacterIdsArray: residentsArr)
+        }
         viewModel.errorCallback = { [weak self] errorMessage in
             print("error",errorMessage)
         }
@@ -93,7 +97,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell {
             if cell.isSelected {
-                cell.backgroundColor = UIColor(named: "title-color")
+                cell.contentView.backgroundColor = .primaryPurple
+                
                 cell.isSelected.toggle()
                 print("bunu secti",cell.cellItem.residents.forEach({ char in
                     let components = char.components(separatedBy: "https://rickandmortyapi.com/api/character/")
@@ -112,24 +117,45 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell {
-            cell.backgroundColor = .clear
+            cell.contentView.backgroundColor = .clear
         }
     }
+    
+    
     
 
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.multipleCharacterItems.count
+        return viewModel.singleCharacterItem.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as? CharacterTableViewCell else {
             fatalError()
         }
+        cell.cellItem = viewModel.singleCharacterItem[indexPath.row]
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CharacterDetailViewController()
+        if let cell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell {
+            if cell.isSelected {
+                vc.selectedCharacter = cell.cellItem
+            }
+        }
+        print("secildik")
+        
+        self.presentVC(to: vc)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as? CharacterTableViewCell else {
+            fatalError()
+        }
     }
     
     

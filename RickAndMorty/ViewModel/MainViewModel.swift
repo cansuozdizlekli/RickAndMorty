@@ -10,12 +10,25 @@ import Foundation
 class MainViewModel {
     let manager = MainManager.shared
     var characterItems = [CharacterResult]()
+    var singleCharacterItem = [CharacterResult]()
     var multipleCharacterItems = [CharacterResult]()
     var locationItems = [LocationResult]()
     var locationNameArray = [String]()
     var errorCallback : ((String)->())?
     var successCallback : (()->())?
     
+    
+    func getSingleCharacter(CharacterIdsArray: [Int]){
+        manager.getSingleCharacter(CharacterIdsArray: CharacterIdsArray) { [weak self] items, error in
+            if let error = error {
+                self?.errorCallback?(error.localizedDescription)
+            } else {
+                self?.singleCharacterItem = items ?? []
+                print("multiplecanım",self?.singleCharacterItem)
+                self?.successCallback?()
+            }
+        }
+    }
     
     func getMultipleCharacters(CharacterIdsArray: [Int]){
         manager.getMultipleCharacters(CharacterIdsArray: CharacterIdsArray) { [weak self] items, error in
@@ -28,6 +41,8 @@ class MainViewModel {
             }
         }
     }
+    
+    
         
     
     func getCharacters() {

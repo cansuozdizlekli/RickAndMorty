@@ -16,9 +16,10 @@ class LocationCollectionViewCell: UICollectionViewCell {
         label = UILabel(frame: CGRect(x: 0, y: 10, width: 120, height: 100))
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 2
+        label.backgroundColor = .clear
         label.textAlignment = .center
-//        label.backgroundColor = .green
         label.textColor = .black
+        label.highlightedTextColor = .white
         return label
     }()
 
@@ -36,8 +37,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(locationName)
         contentView.clipsToBounds = true
         contentView.frame = CGRect(x: 0, y: 0, width: 50, height: 100)
-//        contentView.backgroundColor = .systemGray
-        
+        contentView.backgroundColor = .portalGreen
     }
     
     required init?(coder: NSCoder) {

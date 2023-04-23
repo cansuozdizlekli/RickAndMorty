@@ -63,7 +63,9 @@ class CharacterDetailViewController: UIViewController {
         }
         episodeNumString.removeLast()
         nameLabel.text = selectedCharacter.name
-        createdLabel.text = selectedCharacter.created
+        var createdDate = selectedCharacter.created.replacingOccurrences(of: "T", with: " , ")
+        createdDate = createdDate.replacingOccurrences(of: "-", with: " ")
+        createdLabel.text = createdDate.components(separatedBy: ".")[0]
         episodesLabel.text = episodeNumString
         locationLabel.text = selectedCharacter.location.name
         originLabel.text = selectedCharacter.origin.name
@@ -75,7 +77,6 @@ class CharacterDetailViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         view.addSubview(backButton)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
     }
 
     @objc private func backButtonTapped(_ sender: UIButton) {

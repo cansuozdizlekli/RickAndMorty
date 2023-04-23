@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
     private func setupTableView() {
         characterTableView.dataSource = self
         characterTableView.delegate = self
+        characterTableView.selectionFollowsFocus = false
         characterTableView.showsVerticalScrollIndicator = false
         characterTableView.register(CharacterTableViewCell.nib, forCellReuseIdentifier: CharacterTableViewCell.identifier)
 //        characterTableView.backgroundColor = .green
@@ -160,6 +161,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource  {
         if let cell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell {
             if cell.isSelected {
                 vc.selectedCharacter = cell.cellItem
+                cell.backgroundColor = .clear
             }
         }
         print("secildik")

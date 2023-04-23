@@ -30,7 +30,7 @@ class SplashViewController: UIViewController {
             print("isfirst t")
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
             self.presentVC(to: self.mainVC)
         }
     }

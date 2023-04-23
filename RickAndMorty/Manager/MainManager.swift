@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MainManagerProtocol {
-    func getCharacters(complete: @escaping(([CharacterResult]?, Error?)->()))
+    func getCharacters(complete: @escaping((Any?, Error?)->()))
     func getLocations(complete: @escaping(([LocationResult]?, Error?)->()))
     func getSingleCharacter(CharacterIdsArray: [Int], complete: @escaping(([CharacterResult]?, Error?)->()))
     
@@ -70,14 +70,14 @@ class MainManager : MainManagerProtocol {
     
     
     
-    func getCharacters(complete: @escaping (([CharacterResult]?, Error?) -> ())) {
-        NetworkManager.shared.request(type: Character.self,
+    func getCharacters(complete: @escaping ((Any?, Error?) -> ())) {
+        NetworkManager.shared.request(type: CharacterResult.self,
                                       url: Endpoint.character.path,
                                       method: .get) { response in
             switch response {
             case .success(let data):
-                print("burasııı",data.results)
-                complete(data.results, nil)
+                print("burasııı",data)
+                complete(data, nil)
             case .failure(let error):
                 complete(nil, error)
             }

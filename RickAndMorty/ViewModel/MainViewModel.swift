@@ -48,21 +48,18 @@ class MainViewModel {
         }
     }
     
-    
-        
-    
-    func getCharacters() {
-        manager.getCharacters { [weak self] items, error in
-            if let error = error {
-                self?.errorCallback?(error.localizedDescription)
-            } else {
-                self?.characterItems = items ?? []
-                print("deneme",self!.characterItems)
-                self?.successCallback?()
-            }
-            
-        }
-    }
+//    func getCharacters() {
+//        manager.getCharacters { [weak self] items, error in
+//            if let error = error {
+//                self?.errorCallback?(error.localizedDescription)
+//            } else {
+//                self?.characterItems = items as! [CharacterResult]
+//                print("deneme",self!.characterItems)
+//                self?.successCallback?()
+//            }
+//            
+//        }
+//    }
     
     func getLocations() {
         manager.getLocations { [weak self] items, error in

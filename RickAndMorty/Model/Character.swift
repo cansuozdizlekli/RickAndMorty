@@ -21,7 +21,7 @@ struct Info: Codable {
     let prev: JSONNull?
 }
 
-struct Deneme : Codable {
+struct MultipleCharArray : Codable {
     let data : [CharacterResult]
 }
 

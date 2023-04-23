@@ -36,6 +36,15 @@ class CharacterDetailViewController: UIViewController {
         initUI()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let size: CGSize = UIScreen.main.bounds.size
+        if size.width / size.height > 1 {
+            print("landscape")
+        } else {
+            print("portrait")
+        }
+    }
 
 
     private func initUI(){
@@ -58,9 +67,9 @@ class CharacterDetailViewController: UIViewController {
         episodesLabel.text = episodeNumString
         locationLabel.text = selectedCharacter.location.name
         originLabel.text = selectedCharacter.origin.name
-        genderLabel.text = selectedCharacter.gender.rawValue
-        specyLabel.text = selectedCharacter.species.rawValue
-        statusLabel.text = selectedCharacter.status.rawValue
+        genderLabel.text = selectedCharacter.gender
+        specyLabel.text = selectedCharacter.species
+        statusLabel.text = selectedCharacter.status
         charImageView.sd_setImage(with: URL(string: selectedCharacter.image))
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.isNavigationBarHidden = true
@@ -72,4 +81,6 @@ class CharacterDetailViewController: UIViewController {
     @objc private func backButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
 }

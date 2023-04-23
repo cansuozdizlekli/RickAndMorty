@@ -21,14 +21,18 @@ struct Info: Codable {
     let prev: JSONNull?
 }
 
+struct Deneme : Codable {
+    let data : [CharacterResult]
+}
+
 // MARK: - Result
 struct CharacterResult: Codable {
     let id: Int
     let name: String
-    let status: Status
-    let species: Species
+    let status: String
+    let species: String
     let type: String
-    let gender: Gender
+    let gender: String
     let origin, location: CharacterLocation
     let image: String
     let episode: [String]

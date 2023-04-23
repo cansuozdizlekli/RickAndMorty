@@ -137,7 +137,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="Krw-bw-Kuv"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="22"/>
+                    <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>

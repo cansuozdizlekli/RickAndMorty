@@ -40,11 +40,10 @@ class MainViewController: UIViewController {
         characterTableView.delegate = self
         characterTableView.showsVerticalScrollIndicator = false
         characterTableView.register(CharacterTableViewCell.nib, forCellReuseIdentifier: CharacterTableViewCell.identifier)
-        characterTableView.backgroundColor = .green
+//        characterTableView.backgroundColor = .green
     }
     
     private func viewModelConfiguration(){
-        viewModel.getCharacters()
         viewModel.getLocations()
         viewModel.errorCallback = { [weak self] errorMessage in
             print("error",errorMessage)
@@ -86,19 +85,19 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationCollectionViewCell.identifier, for: indexPath) as? LocationCollectionViewCell else {
             fatalError()
         }
+        cell.backgroundColor = .systemGray6
         cell.cellItem = viewModel.locationItems[indexPath.row]
         print("cansu1",cell.cellItem.name)
-
         cell.setupItems()
-
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell {
             if cell.isSelected {
-                cell.contentView.backgroundColor = .primaryPurple
-                
+                residentsArr = []
+                cell.backgroundColor = .portalGreen
+                print("secilen lokasyon",cell.cellItem.name)
                 cell.isSelected.toggle()
                 print("bunu secti",cell.cellItem.residents.forEach({ char in
                     let components = char.components(separatedBy: "https://rickandmortyapi.com/api/character/")
@@ -113,11 +112,14 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         print("didselect arr",residentsArr)
         CharactersFromViewModel()
+        characterTableView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell {
-            cell.contentView.backgroundColor = .clear
+            cell.backgroundColor = .systemGray6
+            residentsArr = []
+            characterTableView.reloadData()
         }
     }
     
@@ -128,14 +130,27 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.singleCharacterItem.count
+//        return viewModel.singleCharacterItem.count
+        if residentsArr.count == 1 {
+            return viewModel.singleCharacterItem.count
+        }else if residentsArr.count == 0 {
+           return 0
+        }else {
+            return viewModel.multipleCharacterItems.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as? CharacterTableViewCell else {
             fatalError()
         }
-        cell.cellItem = viewModel.singleCharacterItem[indexPath.row]
+        if residentsArr.count == 1 {
+            cell.cellItem = viewModel.singleCharacterItem[indexPath.row]
+        }else if residentsArr.count == 0 {
+            return cell
+        }else {
+            cell.cellItem = viewModel.multipleCharacterItems[indexPath.row]
+        }
 
         return cell
     }

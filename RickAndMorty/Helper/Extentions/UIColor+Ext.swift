@@ -10,7 +10,7 @@ import UIKit
 
 
 extension UIColor {
-    static let portalGreen = UIColor.init(red: 255, green: 255, blue: 255, reqAlpha: 1)
+    static let portalGreen = UIColor.init(red: 66, green: 179, blue: 202, reqAlpha: 0.7)
     static let primaryPurple = UIColor.init(red: 54, green: 21, blue: 108, reqAlpha: 1)   
 }
 

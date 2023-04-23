@@ -12,14 +12,14 @@ protocol MainManagerProtocol {
     func getLocations(complete: @escaping(([LocationResult]?, Error?)->()))
     func getSingleCharacter(CharacterIdsArray: [Int], complete: @escaping(([CharacterResult]?, Error?)->()))
     
-    func getMultipleCharacters(CharacterIdsArray: [Int], complete: @escaping((([CharacterResult])?, Error?)->()))
+    func getMultipleCharacters(CharacterIdsArray: [Int], complete: @escaping(((Any)?, Error?)->()))
 }
 
 class MainManager : MainManagerProtocol {
     
     static let shared = MainManager()
     
-    func getMultipleCharacters(CharacterIdsArray: [Int], complete: @escaping ((([CharacterResult])?, Error?) -> ())) {
+    func getMultipleCharacters(CharacterIdsArray: [Int], complete: @escaping (((Any)?, Error?) -> ())) {
         var charArr: [CharacterResult] = []
         var charSetUrl = Endpoint.character.path + "/"
         CharacterIdsArray.forEach { ids in
@@ -27,13 +27,13 @@ class MainManager : MainManagerProtocol {
         }
         print("bakalmmm",charSetUrl)
         charSetUrl.removeLast()
-        NetworkManager.shared.requestMultipleCharacters(type: [CharacterResult].self,
+        NetworkManager.shared.request(type: [CharacterResult].self,
                                       url: charSetUrl,
                                       method: .get) { response in
             switch response {
             case .success(let data):
                 
-                print("bakcanım",charArr)
+                print("bakcanım",data)
                 complete(data.self, nil)
             case .failure(let error):
                 print("olmadı mı")

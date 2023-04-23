@@ -35,8 +35,8 @@ class NetworkManager {
             let result = try JSONDecoder().decode(T.self, from: data)
             print("neyazimki result",result)
             completion(.success(result))
-        } catch {
-            print("neyazimki catch")
+        } catch let error {
+            print("neyazimki catch", String(describing: error))
             completion(.failure(.invalidData))
         }
     }
@@ -58,15 +58,15 @@ class NetworkManager {
             }
         }
     }
-    
+
     fileprivate func handleResponseArrayOfObject<T: Codable>(data: Data, completion: @escaping((Result<T, ErrorTypes>)->())) {
         do {
             print("neyazimki data",data)
             let result = try JSONDecoder().decode([T].self, from: data)
             print("neyazimki result",result)
             completion(.success(result as! T))
-        } catch {
-            print("neyazimki catch")
+        } catch let error {
+            print("neyazimki catch", String(describing: error))
             completion(.failure(.invalidData))
         }
     }

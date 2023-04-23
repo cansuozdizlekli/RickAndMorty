@@ -14,10 +14,10 @@ class CharacterTableViewCell: UITableViewCell {
         didSet {
             self.charImageView.sd_setImage(with: URL(string: cellItem.image))
             self.charNameLabel.text = cellItem?.name
-            if cellItem.gender.rawValue == "Female"{
+            if cellItem.gender == "Female"{
                 self.charGenderImageview.image = UIImage(named: "female-icon")
             }
-            else if cellItem.gender.rawValue == "Male"{
+            else if cellItem.gender == "Male"{
                 self.charGenderImageview.image = UIImage(named: "male-icon")
             }
             else {

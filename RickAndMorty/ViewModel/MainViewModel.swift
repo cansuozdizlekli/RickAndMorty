@@ -35,9 +35,15 @@ class MainViewModel {
             if let error = error {
                 self?.errorCallback?(error.localizedDescription)
             } else {
-                self?.multipleCharacterItems = items ?? []
+                guard let data = items as? [CharacterResult] else{
+                    print("temizmodel ",items)
+                    return
+                }
+                print("temizmodel",data)
+                self?.multipleCharacterItems = data
                 print("multiplecanım",self?.multipleCharacterItems)
                 self?.successCallback?()
+                
             }
         }
     }

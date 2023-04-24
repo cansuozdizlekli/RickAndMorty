@@ -1,4 +1,4 @@
-# Invıo Task - Rick And Morty App
+# Invıo Task - Rick And Morty App (CANSU ÖZDİZLEKLİ)
 
 ## 1. Summary
 This app shows the characters with their details which are living in some specific locations using [Rick and Morty API](https://rickandmortyapi.com/) .

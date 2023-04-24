@@ -25,7 +25,6 @@ class MainManager : MainManagerProtocol {
         CharacterIdsArray.forEach { ids in
             charSetUrl = charSetUrl + "\(ids),"
         }
-        print("bakalmmm",charSetUrl)
         charSetUrl.removeLast()
         NetworkManager.shared.request(type: [CharacterResult].self,
                                       url: charSetUrl,
@@ -33,10 +32,8 @@ class MainManager : MainManagerProtocol {
             switch response {
             case .success(let data):
                 
-                print("bakcanım",data)
                 complete(data.self, nil)
             case .failure(let error):
-                print("olmadı mı")
                 complete(nil, error)
             }
         }
@@ -50,18 +47,15 @@ class MainManager : MainManagerProtocol {
         CharacterIdsArray.forEach { ids in
             charUrl = charUrl + "\(ids)"
         }
-        
-        print("bakalmmm",charUrl )
+
         NetworkManager.shared.request(type: CharacterResult.self,
                                       url: charUrl,
                                       method: .get) { response in
             switch response {
             case .success(let data):
                 charArr.append(data)
-                print("bakcanım",data)
                 complete(charArr, nil)
             case .failure(let error):
-                print("olmadı mı")
                 complete(nil, error)
             }
         }
@@ -76,7 +70,6 @@ class MainManager : MainManagerProtocol {
                                       method: .get) { response in
             switch response {
             case .success(let data):
-                print("burasııı",data)
                 complete(data, nil)
             case .failure(let error):
                 complete(nil, error)
@@ -91,7 +84,6 @@ class MainManager : MainManagerProtocol {
                                       method: .get) { response in
             switch response {
             case .success(let data):
-                print("neymis",data.results)
                 complete(data.results, nil)
             case .failure(let error):
                 complete(nil, error)

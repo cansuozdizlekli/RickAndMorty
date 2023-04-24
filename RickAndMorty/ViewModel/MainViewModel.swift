@@ -24,7 +24,6 @@ class MainViewModel {
                 self?.errorCallback?(error.localizedDescription)
             } else {
                 self?.singleCharacterItem = items ?? []
-                print("multiplecanım",self?.singleCharacterItem)
                 self?.successCallback?()
             }
         }
@@ -36,12 +35,9 @@ class MainViewModel {
                 self?.errorCallback?(error.localizedDescription)
             } else {
                 guard let data = items as? [CharacterResult] else{
-                    print("temizmodel ",items)
                     return
                 }
-                print("temizmodel",data)
                 self?.multipleCharacterItems = data
-                print("multiplecanım",self?.multipleCharacterItems)
                 self?.successCallback?()
                 
             }
@@ -54,7 +50,6 @@ class MainViewModel {
 //                self?.errorCallback?(error.localizedDescription)
 //            } else {
 //                self?.characterItems = items as! [CharacterResult]
-//                print("deneme",self!.characterItems)
 //                self?.successCallback?()
 //            }
 //            
@@ -67,7 +62,6 @@ class MainViewModel {
                 self?.errorCallback?(error.localizedDescription)
             } else {
                 self?.locationItems = items ?? []
-                print("neymiski",self!.locationItems.count)
                 self?.successCallback?()
             }
             

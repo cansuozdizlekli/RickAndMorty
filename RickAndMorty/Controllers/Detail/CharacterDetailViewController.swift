@@ -36,26 +36,14 @@ class CharacterDetailViewController: UIViewController {
         initUI()
         // Do any additional setup after loading the view.
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        let size: CGSize = UIScreen.main.bounds.size
-        if size.width / size.height > 1 {
-            print("landscape")
-        } else {
-            print("portrait")
-        }
-    }
-
+ 
 
     private func initUI(){
         var episodeNumString : String = ""
-        print(selectedCharacter.episode)
         selectedCharacter.episode.forEach { episodeUrl in
             let components = episodeUrl.components(separatedBy:"https://rickandmortyapi.com/api/episode/")
-            print(components)
             components.forEach { id in
                 if id != ""{
-                    print(id)
                     episodeNumString = episodeNumString + id + ","
                 }
                 

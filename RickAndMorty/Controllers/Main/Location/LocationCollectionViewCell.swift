@@ -19,7 +19,6 @@ class LocationCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.textColor = .black
         label.highlightedTextColor = .white
-        
         return label
     }()
 
@@ -35,7 +34,6 @@ class LocationCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(locationName)
-//        locationName.backgroundColor = .portalGreen
         contentView.clipsToBounds = true
         contentView.frame = CGRect(x: 0, y: 0, width: 50, height: 100)
     }

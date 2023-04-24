@@ -23,6 +23,28 @@ class MainViewController: UIViewController {
         UserDefaults.standard.set(isFirstTime, forKey: "isFirstTime")
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        residentsArr = []
+        locationCollectionView.setContentOffset(CGPoint.zero, animated: true)
+        locationCollectionView.reloadData()
+        getFirstLocationCharacters()
+        characterTableView.reloadData()
+    }
+    
+
+    private func getFirstLocationCharacters(){
+        viewModel.locationItems[0].residents.forEach({ url in
+            let components = url.components(separatedBy: "https://rickandmortyapi.com/api/character/")
+            components.forEach { ids in
+                if ids != ""{
+                    residentsArr.append(Int(ids)!)
+                }
+            }
+        })
+        CharactersFromViewModel()
+        characterTableView.reloadData()
+    }
+    
     private func setupCollectionView() {
         locationCollectionView.delegate = self
         locationCollectionView.dataSource = self
@@ -51,12 +73,11 @@ class MainViewController: UIViewController {
         }
         viewModel.successCallback = { [weak self] in
             self?.locationCollectionView.reloadData()
-//            self?.characterTableView.reloadData()
+            self?.getFirstLocationCharacters()
         }
     }
     
     private func CharactersFromViewModel(){
-        print("array",residentsArr)
         if residentsArr.count == 1 {
             viewModel.getSingleCharacter(CharacterIdsArray: residentsArr)
         }else {
@@ -78,7 +99,6 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("loc sayısı",viewModel.locationItems.count)
         return viewModel.locationItems.count
     }
 
@@ -86,9 +106,15 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationCollectionViewCell.identifier, for: indexPath) as? LocationCollectionViewCell else {
             fatalError()
         }
-        cell.backgroundColor = .systemGray6
+        if cell.isSelected == true {
+            cell.backgroundColor = .portalGreen
+        }else {
+            if indexPath.row == 0 {
+                cell.backgroundColor = .portalGreen
+            }
+            cell.backgroundColor = .systemGray6
+        }
         cell.cellItem = viewModel.locationItems[indexPath.row]
-        print("cansu1",cell.cellItem.name)
         cell.setupItems()
         return cell
     }
@@ -98,20 +124,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if cell.isSelected {
                 residentsArr = []
                 cell.backgroundColor = .portalGreen
-                print("secilen lokasyon",cell.cellItem.name)
                 cell.isSelected.toggle()
-                print("bunu secti",cell.cellItem.residents.forEach({ char in
+                cell.cellItem.residents.forEach({ char in
                     let components = char.components(separatedBy: "https://rickandmortyapi.com/api/character/")
-                    print(components)
                     components.forEach { ids in
                         if ids != ""{
                             residentsArr.append(Int(ids)!)
                         }
                     }
-                }))
+                })
             }
         }
-        print("didselect arr",residentsArr)
         CharactersFromViewModel()
         characterTableView.reloadData()
     }
@@ -124,8 +147,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
-    
-    
+    override func viewDidAppear(_ animated: Bool) {
+        let selectedIndexPath = IndexPath(item: 0, section: 0)
+        locationCollectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+        if let cell = locationCollectionView.cellForItem(at: selectedIndexPath) as? LocationCollectionViewCell {
+            cell.backgroundColor = .portalGreen
+        }
+    }
 
 }
 
@@ -164,17 +192,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource  {
                 cell.backgroundColor = .clear
             }
         }
-        print("secildik")
-        
         self.presentVC(to: vc)
     }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as? CharacterTableViewCell else {
-            fatalError()
-        }
-    }
-    
     
 
 }
